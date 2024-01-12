@@ -9,11 +9,13 @@
 <body>
 
     <p>
-        <!--
-            // con el metodo name del objeto route en las rutas podemos colocarle un nombre a cada ruta, en este caso seria la ruta home y asi en la etiquetas a podemos usar en hretf con doble llaves usar el metodo route y ponemos como argumento el nombre que le colocamos a la ruta con el metodo name en routes
-        -->
         <a href="{{route('home')}}">Home</a>
         <a href="{{route('blog')}}">Blog</a>
+        @auth
+            <a href="{{route('dashboard')}}">Dashboard</a>
+        @else
+            <a href="{{route('login')}}">Login</a>
+        @endauth
     </p>
     <hr>
     @yield('content')
