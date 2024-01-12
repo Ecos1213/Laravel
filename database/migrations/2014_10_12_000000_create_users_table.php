@@ -29,4 +29,18 @@ return new class extends Migration
     {
         Schema::dropIfExists('users');
     }
+    // para configurar nuestra base de datos primero creamos la base de datos en mysql y despues lo configuramos en el .env
+    /**
+     *
+     *en el .env colocamos
+     * DB_DATABASE=proyectolaravel
+     * DB_USERNAME=root
+     * DB_PASSWORD=
+     *
+     * el password y usario correspondiente que tenemos configurado en mysql y el nombre de la base de datos
+     *
+     * con php artisan migrate se conecta a la base de datos y crea las tablas en la base de datos
+     *
+     * para crear una nueva tabla usamos php artisan make:migration create_nombre_table
+     *  */
 };
