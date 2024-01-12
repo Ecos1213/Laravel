@@ -18,6 +18,7 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => 1,
             // recuerda que dentro de este return tiene que ir el valor del nombre del campo de la tabla y el dato que se crea con el faker, por cierto laravel sabe que los datos van en la tabla Post por el nombre del factory
             'title' => $title = $this->faker->sentence(), // con el $this->faker->sentence() creamos un dato falso y el metodo sentence crea una sentencia de texto aleatoria para crear un dato falso y conciso
             'slug' => Str::slug($title),// con el metodo slug de la clase Str nos permite crear una url amigable Str::slug($title)

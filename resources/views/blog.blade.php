@@ -24,6 +24,8 @@
             <a href="{{route('post', $post->slug )}}">
                 {{ $post->title }}
             </a>
+            <br>
+            <span>{{$post->user->name}}</span> <!-- para esto sirve las relaciones para que sea mas corto conocer un valor de otro campo de la relacion de la tabla para que esto funcione necesitamos primero crear en la estructura un campo que se relacione con el campo de otra tabla y tenemos que decirle al modelo el tipo de relacion de estas dos tablas -->
         </p>
     @endforeach
     <!--
