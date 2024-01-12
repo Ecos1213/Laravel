@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+// los datos viven en el modelo por ende tenemos que traer el modelo para tomar los datos que necesitamos osea hacer consultas para traer datos
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -14,16 +16,26 @@ class PageController extends Controller
 
     public function blog()
     {
-        $posts = [
-            ['id' => 1, 'title' => 'PHP', 'slug' => 'php'],
-            ['id' => 2, 'title' => 'Laravel', 'slug' => 'Laravel'],
-        ];
+        //$posts = Post::get(); // eloquent tiene una tecnologia llamada ORM, esto codigo Post::get() toma todos los datos del post de la base de datos
+        /**
+         *
+         * Post::get();-> Trae todos los registros de la base de datos
+         * Post::frist();-> Trae el primer registro de la base de datos
+         * Post::find(id); -> Busca un registro en la base de datos por medio de su id
+         * Post::latest(); -> Trae todos los registros de la base de datos, y los ordena de forma descendente
+         * adicional, podemos utilizar el método paginate(), para realizar la paginación, solo no nos debemos de incluir en nuestras vistas la
+         * propiedad links() para que podamos visualizar los controles de paginación
+         *
+         * */
+        // $posts = Post::first();
+        // $posts = Post::find(25);
+        // dd($posts); // dd es como un print_r organiza los datos para que lo muestre de una manera mas legible humanamente
+        $posts = Post::latest()->paginate();
         return view('blog', ['posts' => $posts]); // podemos pasar datos a una vista de esta manera, tenemos que pasar el array y la vista de php se encargara de tomar cada array internos del array con sus respetivos datos
     }
 
-    public function post($slug)
+    public function post(Post $post)
     {
-        $post = $slug;
         return view('post', ['post' => $post]);
     }
 }

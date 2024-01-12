@@ -16,18 +16,23 @@
             // podemos usar {} doble llaves dos veces para colocar codigo php
         -->
         <p>
-            <strong>{{ $post['id'] }}</strong>
+            <strong>{{ $post->id }}</strong>
             <!--
 
-                // con el metodo name del objeto route en las rutas podemos colocarle un nombre a cada ruta, en este caso seria la ruta home y asi en la etiquetas a podemos usar en hretf con doble llaves usar el metodo route y ponemos como argumento el nombre que le colocamos a la ruta con el metodo name en routes
-                // pero ademas como esta ruta necesita un parametro en la url podemos psarle a este metodo otro parametro que sea el valor del parametro que necesitamos
-
+                //como ya usamos el ORM de laravel que es eloquent y ORM es object relational model lo que hace es de en ver de ser un array tenemos que tomar los datos como un objeto usando ->
             -->
-            <a href="{{route('post', $post['slug'] )}}">
-                {{ $post['title'] }}
+            <a href="{{route('post', $post->slug )}}">
+                {{ $post->title }}
             </a>
         </p>
     @endforeach
+    <!--
+        // el metodo links sirve para mostrar la paginacion de cada dato que hicimos en el pagecontroller
+    -->
+    {{
+        $posts->links()
+
+    }}
 @endsection
 
 

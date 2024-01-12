@@ -18,7 +18,7 @@ Route::controller(PageController::class)->group(function() {
 
     Route::get('blog', 'blog')->name('blog');
 
-    Route::get('blog/{slug}', 'post')->name('post');
+    Route::get('blog/{post:slug}', 'post')->name('post'); // como el slug es un dato del modelo tenemos que colocar post:variable para que laravel entienda que estos datos son registros de base de datos de la tabla post
 });
 
 
