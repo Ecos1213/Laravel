@@ -19,7 +19,22 @@
                                     <a href="" class="text-indigo-600">Editar</a>
                                 </td>
                                 <td class="px-6 py-4">
-                                    Eliminar
+                                    <form action="{{ route('posts.destroy', $post)}}" method="POST">
+                                        <!--
+                                            como vamos a eliminar el valor necesitamos colocar un form y el action tiene que ser la ruta por eso usamos el metodo route
+                                            para apuntra a la ruta creada que es posts.destroy ya que asi en las rutas #osea resources crea la ruta de esta manera y como es un delete enviamos el valor que es un objeto a borrar
+                                            el metodo tiene que ser post pero laravel tiene una anotacion que es method('DELETE') para que entienda que es un http delete ademas de eso necesitamos enviarle un token de seguridad para eso esta
+                                            el csrf
+                                        -->
+                                        @csrf
+                                        @method('DELETE')
+                                        <input
+                                            type="submit"
+                                            value="Eliminar"
+                                            class="bg-gray-800 text-white rounded px-4 py-2"
+                                            onclick = "return confirm('Desea eliminar?')"
+                                        />
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
