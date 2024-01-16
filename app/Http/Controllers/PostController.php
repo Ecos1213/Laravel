@@ -17,6 +17,16 @@ class PostController extends Controller
 
     }
 
+    public function create() {
+        return view('posts.create');
+
+    }
+
+    public function edit(Post $post) {
+        return view('posts.edit',[ 'post' => $post ]);
+
+    }
+
     //destroy es para eliminar informacion
     public function destroy(Post $post) {
         $post->delete(); // el metodo delete del respectivo objeto sirve para eliminar, ya que el metodo destroy tiene que esperar un argumento que es el objeto especifico de post, esto quiere decir que enviara un objeto ya isntanciado o con datos especificos
