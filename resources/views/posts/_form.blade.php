@@ -4,7 +4,7 @@
 <input type="text" name="title" class="rounded border-gray-200 w-full mb-4" value="{{ $post->title }}">
 
 <label for="" class="uppercase text-gray-700 text-xs"> Contenido </label>
-<textarea name="body" rows="5" class="rounded border-gray-200 w-full mb-4">{{ $post->title }}</textarea>
+<textarea name="body" rows="5" class="rounded border-gray-200 w-full mb-4">{{ $post->body }}</textarea>
 
 <div class="flex justify-between items-center">
 

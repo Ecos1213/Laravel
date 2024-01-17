@@ -42,4 +42,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function posts() { // este metodo se coloca en plural por que un usuario tiene muchas publicaciones
+        return $this->hasMany(Post::class); // esta es la manera de decirle a laravel que se va a llenar muchos datos osea una relacion de uno a muchos esto hace referencia que un usuario tiene muchas posts, pero para que esto funcione necsitamos decirle a laravel que se va a llenar varios datos tanto title slug y body y por eso modificamos post ya que en post tenemos que decirle que se llenara varios datos
+    }
 }

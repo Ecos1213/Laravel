@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -14,6 +17,16 @@ class PostController extends Controller
                 'posts' => Post::latest()->paginate()
             ]
         );
+
+    }
+
+    public function store(Request $request) {
+        $post = $request->user()->posts()->create([ // esta forma sirve para crear un post si ves esta apuntando a user despues a posts por que un usuario le pertenece a varios posts y el metodo create sirve para insertarlo
+            'title' => $title = $request->title,
+            'slug' => Str::slug($title),
+            'body' => $request->body,
+        ]);
+        return redirect()->route('posts.edit', $post); // el metodo redirect sirve para redireccionarlo a una vista, usamos el metodo route para dirigirlo a una vista especifica y tenemos que pasarle el mismo registro que guardamos para que muestre el registro creado
 
     }
 
