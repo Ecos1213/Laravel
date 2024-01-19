@@ -26,6 +26,10 @@ class PostController extends Controller
     }
 
     public function store(Request $request) { // esto es crear finalmente
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required'
+        ]); // creamos la validacion a traves del objeto request que nos trae la informacion
         $post = $request->user()->posts()->create([ // esta forma sirve para crear un post si ves esta apuntando a user despues a posts por que un usuario le pertenece a varios posts y el metodo create sirve para insertarlo
             'title' => $title = $request->title,
             'slug' => Str::slug($title),
@@ -41,6 +45,11 @@ class PostController extends Controller
     }
 
     public function update(Request $request, Post $post) { // esto es actualizar finalmente
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
         $post->update([ // este metodo update sirve para actualizar los datos
             'title' => $title = $request->title,
             'slug' => Str::slug($title),
