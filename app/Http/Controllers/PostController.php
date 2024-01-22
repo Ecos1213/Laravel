@@ -28,11 +28,12 @@ class PostController extends Controller
     public function store(Request $request) { // esto es crear finalmente
         $request->validate([
             'title' => 'required',
+            'slug' => 'required|unique:posts,slug', // esto quiere decir que es unico en la tabla post del campo slug
             'body' => 'required'
         ]); // creamos la validacion a traves del objeto request que nos trae la informacion
         $post = $request->user()->posts()->create([ // esta forma sirve para crear un post si ves esta apuntando a user despues a posts por que un usuario le pertenece a varios posts y el metodo create sirve para insertarlo
-            'title' => $title = $request->title,
-            'slug' => Str::slug($title),
+            'title' => $request->title,
+            'slug' => $request->slug,
             'body' => $request->body,
         ]);
         return redirect()->route('posts.edit', $post); // el metodo redirect sirve para redireccionarlo a una vista, usamos el metodo route para dirigirlo a una vista especifica y tenemos que pasarle el mismo registro que guardamos para que muestre el registro creado
@@ -47,12 +48,13 @@ class PostController extends Controller
     public function update(Request $request, Post $post) { // esto es actualizar finalmente
         $request->validate([
             'title' => 'required',
+            'slug' => 'required|unique:posts,slug,' . $post->id, // esto quiere decir que es unico en la tabla post del campo slug y ademas como es una actualizacion y si intentamos actualizar nos dira el mensaje de error de que ya existe para evitar esto tenemos que agregarle el . post->id esto significa que revise pero a la vez entiende que si se actualiza y tiene el mismo id no muestre el mensaje del error
             'body' => 'required'
         ]);
 
         $post->update([ // este metodo update sirve para actualizar los datos
-            'title' => $title = $request->title,
-            'slug' => Str::slug($title),
+            'title' => $request->title,
+            'slug' => $request->slug,
             'body' => $request->body,
         ]);
         return redirect()->route('posts.edit', $post); // el metodo redirect sirve para redireccionarlo a una vista, usamos el metodo route para dirigirlo a una vista especifica y tenemos que pasarle el mismo registro que guardamos para que muestre el registro creado
