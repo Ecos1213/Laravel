@@ -5,20 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Proyecto web</title>
+
+    <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])  <!-- // como tengo diferente vesion de laravel a el de la clase por que este usa vite asi es la manera de llamar un css de esta version usando arroba vite
+    -->
 </head>
 <body>
+    <div class="container px-4 mx-auto">
+        <header class="flex justify-between items-center py-4">
+            <div class="flex items-center flex-grow gap-4">
+                <a href="{{route('home')}}">
+                    <img src="{{asset('images/logo.png')}}" class="h-12">
+                </a>
+                <form action="">
+                    <input type="text" placeholder="Buscar">
+                </form>
+            </div>
 
-    <p>
-        <a href="{{route('home')}}">Home</a>
-        <a href="{{route('blog')}}">Blog</a>
-        @auth
-            <a href="{{route('dashboard')}}">Dashboard</a>
-        @else
-            <a href="{{route('login')}}">Login</a>
-        @endauth
-    </p>
-    <hr>
-    @yield('content')
+            @auth
+                <a href="{{route('dashboard')}}">Dashboard</a>
+            @else
+                <a href="{{route('login')}}">Login</a>
+            @endauth
+        </header>
+        @yield('content')
+    </div>
+
+
     <!--
         // si queremo susar un template en otros contenidos de blade usamos yield una nomenclatura de blade que lo que hace es coger la parte de un blade y poncharla aqui recuerda que lleva como argumento una palabra que vamos a usar en otros blade
     -->
