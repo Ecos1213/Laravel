@@ -9,7 +9,7 @@ Route::controller(PageController::class)->group(function() {
     //dejamos la ruta y el nombre del metodo
     Route::get('/', 'home')->name('home');
 
-    Route::get('blog', 'blog')->name('blog');
+    //Route::get('blog', 'blog')->name('blog');
 
     Route::get('blog/{post:slug}', 'post')->name('post'); // como el slug es un dato del modelo tenemos que colocar post:variable para que laravel entienda que estos datos son registros de base de datos de la tabla post
 });
