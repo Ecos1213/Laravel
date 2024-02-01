@@ -9,9 +9,11 @@ use Illuminate\Http\Request;
 class PageController extends Controller
 {
     // con php artisan make:controller nombrecontroller creamos un controlador podemos colocar varias funciones publicas, pero para el ejemplo colocamos un controlador por cada ruta creada home de la ruta home, blog y post por la ruta blog y post
-    public function home()
+    public function home(Request $request)
     {
-        $posts = Post::latest()->paginate();
+        $search = $request->search;
+        //$posts = Post::latest()->paginate();
+        $posts = Post::where('title', 'LIKE', "%{$search}%")->latest()->paginate();
         return view("home", ['posts' => $posts]); // pasamos todo lo que habia en la ruta y lo usamos aca, en este caso para retornar a la vista
     }
 
