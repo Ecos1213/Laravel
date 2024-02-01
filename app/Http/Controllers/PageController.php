@@ -13,7 +13,9 @@ class PageController extends Controller
     {
         $search = $request->search;
         //$posts = Post::latest()->paginate();
-        $posts = Post::where('title', 'LIKE', "%{$search}%")->latest()->paginate();
+        $posts = Post::where('title', 'LIKE', "%{$search}%")
+        ->with('user') // esto se hace por optimizacion que la consulta traiga de una vez el usuario y no tenga que hacer otra consulta, cuando usamos el $post->user->name en la vista y no hacemos esto, esto hace una consulta a la base de datos por cada post y esto no lo podemos permitir, pero si usamos el with ahi si tomara toda la consulta con sus respectivos datos
+        ->latest()->paginate();
         return view("home", ['posts' => $posts]); // pasamos todo lo que habia en la ruta y lo usamos aca, en este caso para retornar a la vista
     }
 
