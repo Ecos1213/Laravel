@@ -14,9 +14,11 @@ Route::controller(PageController::class)->group(function() {
     Route::get('blog/{post:slug}', 'post')->name('post'); // como el slug es un dato del modelo tenemos que colocar post:variable para que laravel entienda que estos datos son registros de base de datos de la tabla post
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::redirect('dashboard', 'posts')->name('dashboard'); // como no tenemos un dashboard redirecciono con redirect a la ruta posts
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -11,6 +11,8 @@ class PageController extends Controller
     // con php artisan make:controller nombrecontroller creamos un controlador podemos colocar varias funciones publicas, pero para el ejemplo colocamos un controlador por cada ruta creada home de la ruta home, blog y post por la ruta blog y post
     public function home(Request $request)
     {
+        //dd($request->all()); // el metdo dd para el programa y muestra organizadamente los datos en forma de json con colores y en laravel tambien tenemos maneras de ver solo los datos del request que nos interesa usando el metodo all
+        //dd($_REQUEST);
         $search = $request->search;
         //$posts = Post::latest()->paginate();
         $posts = Post::where('title', 'LIKE', "%{$search}%")
